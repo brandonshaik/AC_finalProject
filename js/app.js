@@ -37,7 +37,7 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
 }).attr("x1", x(1959.5)).attr("y2", function(d) {
     return y(d);
 }).attr("x2", x(1960));
-  d3.json("/js/data/asylum1.json", function(data) {
+  d3.json("../js/data/asylum1.json", function(data) {
       var dataset = data,
         years = {};
 
