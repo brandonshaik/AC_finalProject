@@ -6,7 +6,7 @@ $(document).ready(function(){
   var startYear = 2004;
   var endYear = 2013;
   var startSeeker = 0;
-  var endSeeker = 17500;
+  var endSeeker = 7500;
 
   var y = d3.scaleLinear().domain([endSeeker, startSeeker]).range([0+margin, h-margin]);
   var x = d3.scaleLinear().domain([2004,2013]).range([0+margin-5,w]);
@@ -19,37 +19,62 @@ $(document).ready(function(){
     return y(d.y);
   });
 
-  var countries_regions = {};
+vis.append("svg:line").attr("x1", x(1960)).attr("y1", y(startSeeker)).attr("x2", x(2009)).attr("y2", y(startSeeker)).attr("class", "axis")
+vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
+vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
+    return x(d)
+}).attr("y", h - 10).attr("text-anchor", "middle");
+vis.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 0).attr("y", function(d) {
+    return y(d)
+}).attr("text-anchor", "right").attr("dy", 3);
+vis.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {
+    return x(d);
+}).attr("y1", y(startSeeker)).attr("x2", function(d) {
+    return x(d);
+}).attr("y2", y(startSeeker) + 7);
+vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {
+    return y(d);
+}).attr("x1", x(1959.5)).attr("y2", function(d) {
+    return y(d);
+}).attr("x2", x(1960));
   d3.json("/js/data/asylum1.json", function(data) {
-    console.log(data);
-  for (i=1; i < data.length; i++) {
-    countries_regions[data[i][0]]= data[i][1];
-  };
+      var dataset = data,
+        years = {};
+
+      _.each(data, function(country){
+        var curData = [];
+
+        var years = Object.keys(country);
+
+        years = _.filter(years, function(o){
+          return $.isNumeric(o);
+        });
+
+        _.each(years, function(year){
+          curData.push({
+            x: year,
+            y: country[year]
+          });
+        });
+
+        console.log(curData);
+
+        //draw the line
+        vis.append("svg:path").data([curData]).attr("country", country.region).attr("d", line);
+      });
+
+      // for(var i = 2004; i <= 2013; i++){
+      //   years[i] = _.map(data, function(o){
+      //     return {country: o.region, value: o[i]};
+      //   });
+      // }
+
+      console.log(years);
+
+
+
+    });
   });
-  console.log(countries_regions)
 
 
 
-
-	// Exercise
-	// 1. load data using d3 and define the newly rendered data set as a variable
-
-    // d3.csv("js/data.csv", function(data){
-    //   var dataset = data;
-
-    //   // 2. Within the d3 data function, select a container through d3
-    //   var chart = d3.select("#chart");
-
-    //   // 3. Within the d3 data function, add a paragraph for each data point into the container diplaying
-    //   chart.selectAll("div")
-    //         .data(dataset)
-    //         .enter()
-    //         .append("div")
-    //         .text(function(d){
-    //           return "The food group is " + d.food_group;
-    //         });
-
-    //   console.log(dataset);
-    // });
-
-});
