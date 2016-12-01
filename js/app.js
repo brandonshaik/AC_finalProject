@@ -19,7 +19,7 @@ $(document).ready(function(){
     return y(d.y);
   });
 
-vis.append("svg:line").attr("x1", x(1960)).attr("y1", y(startSeeker)).attr("x2", x(2009)).attr("y2", y(startSeeker)).attr("class", "axis")
+vis.append("svg:line").attr("x1", x(2004)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
 vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
     return x(d)
@@ -42,9 +42,8 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
         years = {};
 
       _.each(data, function(country){
-        var curData = [];
-
-        var years = Object.keys(country);
+        var curData = [],
+        years = Object.keys(country);
 
         years = _.filter(years, function(o){
           return $.isNumeric(o);
