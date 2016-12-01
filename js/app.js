@@ -39,7 +39,7 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
 }).attr("x2", x(1960));
 
 // HAVE TO HAVE 'AC_FINALPROJECT' TO WORK IN GH-PAGES, TO WORK IN BROWSER REMOVE 'AC_FINALPROJECT'
-  d3.json("AC_finalProject/js/data/asylum1.json", function(data) {
+  d3.json("/js/data/asylum1.json", function(data) {
       var dataset = data,
         years = {};
 
