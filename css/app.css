@@ -78,15 +78,26 @@ h1, h2, h3, h4, h5, h6{
 /*app specific*/
 
 h1{
-	text-align: center;
+	text-align: left;
     padding-top: 5%;
-    font-size: 1em;
+    font-size: 3em;
     font-weight: 600;
     color: #8a8a8a;
 }
 
+h2{
+    padding-top:3%;
+    font-size:1em;
+}
+
+h3 {
+    padding-top:5%;
+    margin-top: 40px;
+    font-size:1.5em;
+}
+
 #result p {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
     font-family:'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-weight: 600;
@@ -113,7 +124,7 @@ h1{
 
 path{
   stroke: #e2e2e2;
-  stroke-width: 0.9;
+  stroke-width: 2;
   fill: none;
 }
 
