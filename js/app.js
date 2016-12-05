@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
-vis.append("svg:line").attr("x1", x(startYear-10)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
+vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker-2)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
 
 // Axes Labels
 vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
