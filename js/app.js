@@ -18,17 +18,18 @@ $(document).ready(function(){
   var years = d3.range(startYear, endYear);
 
   // Create SVG
-  var vis = d3.select("#vis").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
+  var vis = d3.select("#vis").append("svg:svg").attr("width", w).attr("height", h).append("svg:g").attr("viewBox", "0 0 " + w + " " + h)
+                        .attr("preserveAspectRatio", "xMinYMin slice");
+  var line = d3.line().x(function(d,i){;
 
   // Draw lines
-  var line = d3.line().x(function(d,i){
     return x(d.x);
   }).y(function(d){
     return y(d.y);
   });
 
 
-vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker-2)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
+vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
 
 // Axes Labels

@@ -128,3 +128,70 @@ path{
   fill: none;
 }
 
+/* ai2HTML */
+
+
+
+/* media queries*/
+[id$="-desktop"],
+[id*="-desktop "] {
+  display: block;
+}
+
+[id$="-tablet"],
+[id*="-tablet "] {
+  display: none;
+}
+
+[id$="-mobile"],
+[id*="-mobile "] {
+  display: none;
+}
+
+
+@media  (max-width: 768px){
+  [id$="-desktop"],
+  [id*="-desktop "] {
+    display: none;
+  }
+
+  [id$="-tablet"],
+  [id*="-tablet "] {
+    display: block;
+  }
+
+  [id$="-mobile"],
+  [id*="-mobile "] {
+    display: none;
+  }
+}
+
+@media  (max-width: 480px){
+  [id$="-desktop"],
+  [id*="-desktop "] {
+    display: none;
+  }
+
+  [id$="-tablet"],
+  [id*="-tablet "] {
+    display: none;
+  }
+
+  [id$="-mobile"],
+  [id*="-mobile "] {
+    display: block;
+  }
+}
+
+h1{
+  text-align: center;
+}
+h3, h2{
+  text-align: center;
+  font-size: 25px;
+
+}
+
+#cite{
+  font-weight: bold;
+}
