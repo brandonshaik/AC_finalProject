@@ -32,10 +32,10 @@ vis.append("svg:line").attr("x1", x(2004)).attr("y1", y(startSeeker)).attr("x2",
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
 
 // Axes Labels
-vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text("year").attr("x", function(d) {
+vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
     return x(d)
 }).attr("y", h - 10).attr("text-anchor", "middle");
-vis.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text("Individuals Grandted Asylum").attr("x", 0).attr("y", function(d) {
+vis.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 0).attr("y", function(d) {
     return y(d)
 }).attr("text-anchor", "right").attr("dy", 3);
 vis.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {
