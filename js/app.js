@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-
+  // create global variables for scale, axes and SVG
   var w = 925;
   var h = 600;
   var margin = 30;
@@ -10,13 +10,17 @@ $(document).ready(function(){
   var startSeeker = 3;
   var endSeeker = 5500;
 
+  // Define scale and range
  //var y = d3.scaleLinear().domain([endSeeker, startSeeker]).range([0+margin, h-margin]);
  var y = d3.scaleLinear().domain([endSeeker,startSeeker]).range([margin,570]);
  //var x = d3.scaleLinear().domain([2004,2013]).range([0+margin-5,w]);
  var x = d3.scaleLinear().domain([2004,2013]).range([40,w]);
   var years = d3.range(startYear, endYear);
+
+  // Create SVG
   var vis = d3.select("#vis").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
 
+  // Draw lines
   var line = d3.line().x(function(d,i){
     return x(d.x);
   }).y(function(d){
@@ -26,10 +30,12 @@ $(document).ready(function(){
 
 vis.append("svg:line").attr("x1", x(2004)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
-vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
+
+// Axes Labels
+vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text("year").attr("x", function(d) {
     return x(d)
 }).attr("y", h - 10).attr("text-anchor", "middle");
-vis.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text(String).attr("x", 0).attr("y", function(d) {
+vis.selectAll(".yLabel").data(y.ticks(4)).enter().append("svg:text").attr("class", "yLabel").text("Individuals Grandted Asylum").attr("x", 0).attr("y", function(d) {
     return y(d)
 }).attr("text-anchor", "right").attr("dy", 3);
 vis.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class", "xTicks").attr("x1", function(d) {
@@ -39,9 +45,9 @@ vis.selectAll(".xTicks").data(x.ticks(5)).enter().append("svg:line").attr("class
 }).attr("y2", y(startSeeker) + 7);
 vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class", "yTicks").attr("y1", function(d) {
     return y(d);
-}).attr("x1", x(1959.5)).attr("y2", function(d) {
+}).attr("x1", x(2003.5)).attr("y2", function(d) {
     return y(d);
-}).attr("x2", x(1960));
+}).attr("x2", x(2004));
 
 
 // HAVE TO HAVE 'AC_FINALPROJECT' TO WORK IN GH-PAGES, TO WORK IN BROWSER REMOVE 'AC_FINALPROJECT'
@@ -68,7 +74,7 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
 
 
 
-        //draw the line
+        //Mouseover
         vis.append("svg:path").data([curData]).attr("country", country.region).attr("d", line)
         .on("mouseover", function(){
           d3.select(this)
@@ -81,7 +87,7 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
       });
 
 
-   
+
 
 
 
