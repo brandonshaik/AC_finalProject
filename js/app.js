@@ -1,15 +1,19 @@
 $(document).ready(function(){
 
+
+
   var w = 925;
-  var h = 550;
+  var h = 600;
   var margin = 30;
   var startYear = 2004;
   var endYear = 2013;
-  var startSeeker = 0;
-  var endSeeker = 7500;
+  var startSeeker = 3;
+  var endSeeker = 5500;
 
-  var y = d3.scaleLinear().domain([endSeeker, startSeeker]).range([0+margin, h-margin]);
-  var x = d3.scaleLinear().domain([2004,2013]).range([0+margin-5,w]);
+ //var y = d3.scaleLinear().domain([endSeeker, startSeeker]).range([0+margin, h-margin]);
+ var y = d3.scaleLinear().domain([endSeeker,startSeeker]).range([margin,570]);
+ //var x = d3.scaleLinear().domain([2004,2013]).range([0+margin-5,w]);
+ var x = d3.scaleLinear().domain([2004,2013]).range([40,w]);
   var years = d3.range(startYear, endYear);
   var vis = d3.select("#vis").append("svg:svg").attr("width", w).attr("height", h).append("svg:g");
 
@@ -18,6 +22,7 @@ $(document).ready(function(){
   }).y(function(d){
     return y(d.y);
   });
+
 
 vis.append("svg:line").attr("x1", x(2004)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
@@ -37,6 +42,7 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
 }).attr("x1", x(1959.5)).attr("y2", function(d) {
     return y(d);
 }).attr("x2", x(1960));
+
 
 // HAVE TO HAVE 'AC_FINALPROJECT' TO WORK IN GH-PAGES, TO WORK IN BROWSER REMOVE 'AC_FINALPROJECT'
   d3.json("js/data/asylum1.json", function(data) {
@@ -60,17 +66,22 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
 
         console.log(curData);
 
+
+
         //draw the line
-        vis.append("svg:path").data([curData]).attr("country", country.region).attr("d", line);
+        vis.append("svg:path").data([curData]).attr("country", country.region).attr("d", line)
+        .on("mouseover", function(){
+          d3.select(this)
+          .style("stroke","red");
+        })
+        .on("mouseout", function(d){
+          d3.select(this)
+          .style("stroke","");
+        })
       });
 
-      // for(var i = 2004; i <= 2013; i++){
-      //   years[i] = _.map(data, function(o){
-      //     return {country: o.region, value: o[i]};
-      //   });
-      // }
 
-      console.log(years);
+   
 
 
 
