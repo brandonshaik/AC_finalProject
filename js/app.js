@@ -7,7 +7,7 @@ $(document).ready(function(){
   var margin = 30;
   var startYear = 2004;
   var endYear = 2013;
-  var startSeeker = 3;
+  var startSeeker = 0;
   var endSeeker = 5500;
 
   // Define scale and range
