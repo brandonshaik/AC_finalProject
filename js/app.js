@@ -29,8 +29,28 @@ $(document).ready(function(){
   });
 
 
-vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis")
+vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(2013)).attr("y2", y(startSeeker)).attr("class", "axis").on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div .html(formatTime(d.date) + "<br/>"  + d.close)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
 vis.append("svg:line").attr("x1", x(startYear)).attr("y1", y(startSeeker)).attr("x2", x(startYear)).attr("y2", y(endSeeker)).attr("class", "axis")
+
+
+// tooltip
+
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 
 // Axes Labels
 vis.selectAll(".xLabel").data(x.ticks(5)).enter().append("svg:text").attr("class", "xLabel").text(String).attr("x", function(d) {
@@ -80,10 +100,19 @@ vis.selectAll(".yTicks").data(y.ticks(4)).enter().append("svg:line").attr("class
         .on("mouseover", function(){
           d3.select(this)
           .style("stroke","red");
+          tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltip.html(country.region)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
         })
         .on("mouseout", function(d){
           d3.select(this)
           .style("stroke","");
+          tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
         })
       });
 
